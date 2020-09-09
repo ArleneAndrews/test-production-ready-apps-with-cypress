@@ -1,0 +1,217 @@
+[Speaker quickly shows screen shots of various Cypress features as he delivers the following introduction]
+
+End-to-end testing gets a bad name. It's flaky. It's unreliable. It's slow. All of that changed with Cypress.
+
+
+Cypress sees the world like a real user. It knows what's visible, what's hidden. 
+
+It automatically waits for objects to show up on the DOM. No more sleeps. No more waits. Cypress handles this out-of-the-box.
+
+
+You can travel through time. You can take screenshots. But that all just undersell the sales pitch. That says Cypress is better and faster than what came before, but Cypress is more than that. It's a paradigm shift in end-to-end testing. That's because it can test every layer of the stack, the database, the API, the XHR request, our UI, our frontend stores, everything.
+
+With Cypress, you can interact with your frontend and your backend and everything in between. Confusing error codes can become a thing of the past because if you test every layer in order, you can pinpoint the exact location where the contract breaks down. You can communicate with new team members more effectively what the dataflow looks like.
+
+Yes, we can still use diagrams and drawings, but you can also say it all with the test now. Now you can't quite do all of this out-of-the-box with Cypress. That's why, in this course, I'm going to show you how you can build a transformative testing environment.
+
+#Install Cypress in a Production Application
+[Screen shows a terminal, with the prompt showing the root directory]
+In this lesson, we'll learn how to add Cypress to an existing
+application. First, let's git clone the sample repo.
+[speaker types]
+
+
+    $ git clone
+[the terminal responds with]
+
+    https://github.com/SamGrinis/cypress-eggheadcourse.
+    git
+    Cloning into 'cypress-egghead-course'...
+    remote: Enumerating objects: 157, done.
+    remote: Counting objects: 100% (157/157), done.
+    remote: Compressing objects: 100% (111/111),
+    done.
+    remote: Total 462 (delta 75), reused 113 (delta
+    42), pack-reused 305
+    Receiving objects: 100% (462/462), 512.79 KiB 6.66 MiB/s, done.`
+    Resolving deltas: 100% (218/218), done.
+
+Next, cd into the repo and git
+checkout the 01-cypress-install branch.[Speaker types the commands to change directory and then select the branch]
+
+    $ cd cypress-egghead-course
+    $ git checkout 01-cypress-install
+
+Next, run npm install.[Speaker types the command]
+
+    $ npm install
+
+[Terminal shows download progress, them the various install readouts for a successful installation]
+ When it's finished installing, you can start the demo application
+with npm run start. [Speaker types the command]
+
+    $ npm run start
+[The terminal responds with successfully starting the application in a browser window] 
+This command will automatically open the demo application on
+localhost 5000. [Terminal program window opens again, and a new terminal is shown. Speaker types in the command into the new terminal window.]
+You can verify that your application is working by running npm
+run test.
+
+    $ npm run test
+
+[The terminal quickly runs through the test suite in a few seconds, and shows that it is ready to retest the application.]
+Once our application is verified, we're prepared to run npm install
+cypress --save dev.[Speaker types the command into the newer terminal window.]
+
+    $ npm install cypress --save-dev
+[Terminal shows readouts for the successful download and install of Cypress.] Once Cypress is installed, we're prepared to run it with (npm
+bin)/cypress open.[Speaker types the command, and a new window opens.] This will pop open the Cypress interactive
+GUI which comes pre-seeded with a number of tests.
+
+    $ (npm bin)/cypress open
+If we click on one, we can see an example of Cypress in action.[Speaker clicks on a test suite, and Cypress opens to full screen. The screen shows both the test actions that are being run, and the web site. As the tests run, the individual actions are shown, and the screens are updated with both test cases run, and the site's page.]
+This is Cypress running on the Cypress website.
+We can see here that Cypress can either run against our local
+page or against a remote page.
+[Speaker opens the I.D.E., and shows where the pre-seeded tests are stored.]
+All of these example files live in the Cypress directory under
+integration. You'll probably want an easier way to run Cypress, so
+open package.json and add a cypress command, which will be
+cypress open.[Speaker selects package.json from the list of files, and opens it in the I.D.E., moves to the scripts section]
+
+
+    "scripts": {
+    "start": "concurrently 'npm:frontend'
+    'npm:api'",
+    "frontend": "PORT=5000
+    REACT_APP_API_URL=http://localhost:3000 reactscripts
+    start",
+    "api": "node --inspect server.js",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "test": "react-scripts test --env=node"}
+
+ 
+[they add a comma on the current last line, and type on a new line above the closing curly bracket]
+
+
+    "cypress": "cypress open"
+
+[Speaker changes back to the I.D.E., and types in the newer terminal window]We can use our new command by running npm run cypress.
+
+
+    $ npm run cypress
+[The terminal responds with]
+
+    > todomvc@0.0.1 cypress
+    /Users/samgrinis/cypress-egghead-course
+    > cypress open
+Now you're all set up with Cypress and ready to roll. [Speaker opens the Cypress GUI, and it loads the example tests available.] If you'd like
+to do an exercise before moving on to the next lesson, take a
+moment and familiarize yourself with some of the example tests.
+
+#Setup Your Cypress Dev Environment
+In this lesson, we're going to set up the Cypress dev environment
+in order to make learning Cypress as easy as possible. To get
+started, check out the O2 Cypress Dev Environment branch.
+terminal
+$ git checkout 02-cypress-dev-enviroment
+If you use VS Code, and you used npm install to install Cypress,
+then you already have IntelliSense set up.
+The reason this works is because of what VS Code calls automatic
+type acquisition. This can work in one of two ways. The most
+common way is to use this triple slash directive, `///`, which
+describes which types are defined in this file.
+The triple slash directive isn't limited to VS Code, and works in
+any editor that uses IntelliSense. If want to prove that the triple
+slash directive is what's loading this up for us, we can comment it
+out.
+actions.spec.js
+// /// <reference types="Cypress" />
+Once we save it and hover over cy.visit it has no idea where
+the type definitions are found.
+Let's dive in a little deeper to see where these come from. Let's
+comment that back in.
+/// <reference types="Cypress" />
+Hover over cy.visit again, click Go To Definition, and see this
+index.d.ts file which we can see is located in this directory
+under the node_modules folder, under
+cypress/types/index.d.ts. We can also see this in the side
+bar.
+What would happen if we moved this file from
+node_modules/cypress/types/index.d to the root of our
+project?
+terminal
+$ mv node_modules/cypress/types/index.d.ts .
+Will the IntelliSense still work? We reopen our editor and see that
+the file we opened before has been deleted from the disc because
+we moved it to the project root. If we reopen and look this up,
+IntelliSense is still working. Let's go to definition and see what
+happens now. VS Code is still able to find the typescript definition
+file.
+As I look at it, I can tell that this installed in my
+global/node_modules folder, which means that VS Code is able
+to resolve either a global installation of Cypress or a local
+installation of Cypress to give us these typescript definitions.
+Now that we've learned where the file comes from, let's go ahead
+and move this back to our node_modules/cypress/types folder.
+$ mv index.d.ts node_modules/cypress/types
+In many editors the triple slash directive is the only way we can
+find type information for our Cypress files. However, in VS Code
+we have a global way to look these up. I'll comment this out, and
+we know that this means the /// directive is no longer going to
+be used.
+actions.spec.js
+// /// <reference types="Cypress" />
+Now let's create a tsconfig.json file in the root of the cypress
+directory. If you visit the Cypress docs located in the show notes,
+you can copy this tsconfig and paste it in.
+tsconfig.json
+{
+"compilerOptions": {
+"allowJs": true,
+"baseUrl": "../node_modules",
+"types": [
+"cypress"
+]
+},
+"include": [
+"**/*.*"
+]
+}
+Now that we've configured the ts.config, we can still look up
+the cy.visit method, even without our triple slash directive.
+There's just one more config file that we're going to want to add
+to the root of our project. Cypress itself accepts a lot of different
+configuration options. For instance, we can configure what the
+root URL is of our project.
+If we close this out, go into our project root and add a new file
+called cypress.json, we can configure this here. We can add
+baseURL for instance, http://localhost:5000 which is the root
+of our project.
+cypress.json
+{
+"baseUrl": "http://localhost:5000",
+}
+VS Code can even be configured to tell us which options are
+accepted by the cypress.json file, or if we hover over, to tell us a
+little bit more about what option we're configuring.
+To configure this, we can go to the user settings under
+json.schemas, edit in settings.json, and we can see that I've
+already configure my editor here to do this.
+settings.json
+{
+"workbench.editor.enablePreview": false,
+"json.schemas": [
+{
+"fileMatch": [
+"cypress.json"
+],
+"url":
+"https://on.cypress.io/cypress.schema.json"
+}
+],
+...
+}
+This is another configuration that's available on the Cypress
+documentation, and is included in the show notes.
