@@ -1,0 +1,24 @@
+These notes are for version 4.9 and higher - the video is written for an earlier version. Many things have changed, and I'll try and make the notes as complete as possible for this version.
+
+This class also presumes that you have an IDE (Integrated development environment), as well as a small knowledge of working with GitHub. Nearly any of the common IDE's will work: [VSCode](https://code.visualstudio.com/Download), [Atom](https://atom.io/), or many of the other options out there.  The first two lessons of [Practical Git](https://egghead.io/courses/practical-git-for-everyday-professional-use) will give you the tools to work within this class.
+
+~~
+
+Cypress reacts much like a real user, seeing the screen as a human would. Things that are hidden to the user cannot be interacted with. Error messages are then improved by seeing exactly where the issues are, by having access to various levels of the application. Cypress tests can supplement diagrams, making team communication easier. Some features can be added and customized for your specific needs, and they will improve your experience. And the newer versions of Cypress add functionality that makes it more useful for testing in different browsers, and in more situations. There are ongoing improvements, and changes to the Cypress testing system.
+
+**Please** use the repository (repo) listed in the code section of the transcript, not the one shown on the screen in the video - these are two very different files. And the installation is many times slower than shown in the video - the instructor has the branch installed before the video starts. There are a lot of errors: you should ALWAYS fix (or at least read) errors, even in a training package. The suggested changes found (by VSCode) in  `npm audit` and manually fixing them takes a bunch of time - at least look at the errors, and insure you fix the important ones for package functionality.
+
+So you're ready to add Cypress to an application? You need to do a bit of poking around first: check to make sure your system is supported (at [Cypress System Requirements](https://docs.cypress.io/guides/getting-started/installing-cypress.html#System-requirements)) Cypress normally is installed as a developer dependency, so that the is dependent on the specific project code, and is not shipped with the final product. 
+
+If node.js is at version 8 or above, then you can use [npm to install Cypress](https://docs.cypress.io/guides/getting-started/installing-cypress.html#npm-install) and activate Intellisense if your IDE supports it, but this is not the only option. 
+
+The Cypress documentation shows ways to install via [yarn](https://docs.cypress.io/guides/getting-started/installing-cypress.html#yarn-add),as well. This is a good option if you are already using yarn for your project.
+
+[Direct download](https://docs.cypress.io/guides/getting-started/installing-cypress.html#Direct-download) - which is an option that will work without needing to install node, as well. However, this method will not allow you to record on the dashboard, so another method is preferable.
+
+[Opening](https://docs.cypress.io/guides/getting-started/installing-cypress.html#Opening-Cypress) the new installation lets you view some boilerplate tests, and run them against your application - but they may not all pass! Once installed, updating the package.json file with a shortcut will open Cypress more quickly, both now and once you have written custom tests.
+
+
+The npm install adds IntelliSense to VS Code (need to check other installs and current version). Automatic Type Acquisition uses either a three slash syntax for what type of file it is (and it works in all systems that use intelliSense), or a tsconfig.json file in the Cypress directory. Either way, Intellisense will be there to assist you with finding the types of files you have, and giving hints on working with them.
+
+Going to the root folder, and adding a cypress.json file will allow you to set Cypress options like baseURL for this project. Using the VS Code json schemas will let you work more easily with this across projects.
