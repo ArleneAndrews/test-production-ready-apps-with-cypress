@@ -19,6 +19,6 @@ The Cypress documentation shows ways to install via [yarn](https://docs.cypress.
 [Opening](https://docs.cypress.io/guides/getting-started/installing-cypress.html#Opening-Cypress) the new installation lets you view some boilerplate tests, and run them against your application - but they may not all pass! Once installed, updating the package.json file with a shortcut will open Cypress more quickly, both now and once you have written custom tests.
 
 
-The npm install adds IntelliSense to VS Code (need to check other installs and current version). Automatic Type Acquisition uses either a three slash syntax for what type of file it is (and it works in all systems that use intelliSense), or a tsconfig.json file in the Cypress directory. Either way, Intellisense will be there to assist you with finding the types of files you have, and giving hints on working with them.
+The npm install adds IntelliSense to VS Code ('yarn' will not add it, but there may be a way to add it that is outside the scope of this class). Automatic Type Acquisition uses either a three slash syntax for what type of file it is (and it works in all systems that use intelliSense), or a tsconfig.json file in the Cypress directory. Either way, Intellisense will be there to assist you with finding the types of files you have, and giving hints on working with them.
 
 Going to the root folder, and adding a cypress.json file will allow you to set Cypress options like baseURL for this project. Using the VS Code json schemas will let you work more easily with this across projects.
